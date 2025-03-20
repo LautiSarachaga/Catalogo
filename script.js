@@ -107,6 +107,7 @@ function generarPDF() {
         `;
     });
 
+    
     pdfContent.innerHTML += `
             </tbody>
         </table>
