@@ -1,12 +1,11 @@
 const productos = [
-    { nombre: "Producto 1", precio: 100, imagen: "imagenes/producto1.jpeg" },
-    { nombre: "Producto 2", precio: 150, imagen: "imagenes/producto2.jpeg" },
-    { nombre: "Producto 3", precio: 200, imagen: "imagenes/producto3.jpeg" },
-    { nombre: "Producto 4", precio: 250, imagen: "imagenes/producto4.jpeg" },
-    { nombre: "Producto 5", precio: 300, imagen: "imagenes/producto5.jpeg" },
-    { nombre: "Producto 6", precio: 350, imagen: "imagenes/producto6.jpeg" },
-    { nombre: "Producto 7", precio: 400, imagen: "imagenes/producto1.jpeg" },
-    { nombre: "Producto 8", precio: 450, imagen: "imagenes/producto1.jpeg" }
+    { nombre: "Vaso doble tapa", precio: 18000, imagen: "imagenes/producto1.jpeg" },
+    { nombre: "Vaso con destapador", precio: 18000, imagen: "imagenes/producto2.jpeg" },
+    { nombre: "Cartera 1", precio: 15000, imagen: "imagenes/producto3.jpeg" },
+    { nombre: "Cartera 2", precio: 20000, imagen: "imagenes/producto4.jpeg" },
+    { nombre: "Mochila chica femenina", precio: 24000, imagen: "imagenes/producto5.jpeg" },
+    { nombre: "Mochila grande", precio: 30000, imagen: "imagenes/producto6.jpeg" },
+
 ];
 
 const carrito = [];
@@ -107,7 +106,7 @@ function generarPDF() {
         `;
     });
 
-    
+
     pdfContent.innerHTML += `
             </tbody>
         </table>
