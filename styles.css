@@ -28,9 +28,9 @@ body {
 }
 
 .product-card img {
-    width: 50px;   /* Ancho máximo permitido */
-    height: 200px;  /* Alto máximo permitido */
-    object-fit: cover;  /* Escala la imagen para que se ajuste bien */
+    width: 350px;    /* Ancho fijo */
+    height: 200px;   /* Alto fijo */
+    object-fit: cover; /* Recorta la imagen si es necesario para que se ajuste bien */
     border-radius: 8px;
     margin-bottom: 10px;
 }
