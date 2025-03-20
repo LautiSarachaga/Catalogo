@@ -5,8 +5,8 @@ const productos = [
     { nombre: "Producto 4", precio: 250, imagen: "imagenes/producto4.jpeg" },
     { nombre: "Producto 5", precio: 300, imagen: "imagenes/producto5.jpeg" },
     { nombre: "Producto 6", precio: 350, imagen: "imagenes/producto6.jpeg" },
-    { nombre: "Producto 7", precio: 400, imagen: "imagenes/producto.jpeg" },
-    { nombre: "Producto 8", precio: 450, imagen: "imagenes/producto.jpeg" }
+    { nombre: "Producto 7", precio: 400, imagen: "imagenes/producto1.jpeg" },
+    { nombre: "Producto 8", precio: 450, imagen: "imagenes/producto1.jpeg" }
 ];
 
 const carrito = [];
@@ -31,7 +31,19 @@ function renderProductos() {
 }
 
 function agregarAlCarrito(index) {
-    carrito.push(productos[index]);
+    const producto = productos[index];
+    
+    // Buscar si el producto ya está en el carrito
+    const productoEnCarrito = carrito.find(item => item.nombre === producto.nombre);
+
+    if (productoEnCarrito) {
+        // Si ya está, incrementar la cantidad
+        productoEnCarrito.cantidad += 1;
+    } else {
+        // Si no está, agregarlo al carrito con cantidad 1
+        carrito.push({ ...producto, cantidad: 1 });
+    }
+
     actualizarCarrito();
 }
 
@@ -40,7 +52,7 @@ function actualizarCarrito() {
         <h2 class="font-bold text-lg mb-2">Carrito</h2>
         ${carrito.map((producto, index) => `
             <div class="mb-2 flex justify-between items-center">
-                <span>${producto.nombre} - $${producto.precio}</span>
+                <span>${producto.nombre} - $${producto.precio} x ${producto.cantidad}</span>
                 <button onclick="eliminarDelCarrito(${index})" class="text-red-500">X</button>
             </div>
         `).join('')}
@@ -55,18 +67,56 @@ function eliminarDelCarrito(index) {
 
 function generarPDF() {
     const pdfContent = document.createElement('div');
+    
+    // Información de la factura
+    const nombreNegocio = "Negocio de Zaira"; // Nombre del negocio
+    const fechaFactura = new Date().toLocaleDateString(); // Fecha actual
+
+    // Agregar el encabezado de la factura
+    pdfContent.innerHTML = `
+        <h2>${nombreNegocio}</h2>
+        <p><strong>Factura</strong></p>
+        <p><strong>Fecha:</strong> ${fechaFactura}</p>
+        <hr />
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid #000; padding: 5px; text-align: left;">Producto</th>
+                    <th style="border: 1px solid #000; padding: 5px; text-align: left;">Precio Unitario</th>
+                    <th style="border: 1px solid #000; padding: 5px; text-align: left;">Cantidad</th>
+                    <th style="border: 1px solid #000; padding: 5px; text-align: left;">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    let totalFactura = 0;
+
     carrito.forEach(producto => {
-        const productDiv = document.createElement('div');
-        productDiv.innerHTML = `
-            <div>
-                <h3>${producto.nombre}</h3>
-                <img src="${producto.imagen}" alt="${producto.nombre}" style="width: 100px; height: 100px;">
-                <p>Precio: $${producto.precio}</p>
-            </div>
+        const totalProducto = producto.precio * producto.cantidad;
+        totalFactura += totalProducto;
+    
+        pdfContent.innerHTML += `
+            <tr>
+               <td style="border: 1px solid #000; padding: 10px; text-align: left;">${producto.nombre}</td>
+                <td style="border: 1px solid #000; padding: 10px; text-align: right;">$${producto.precio}</td>
+                <td style="border: 1px solid #000; padding: 10px; text-align: center;">${producto.cantidad}</td>
+                <td style="border: 1px solid #000; padding: 10px; text-align: right;">$${totalProducto}</td>
+            </tr>
+            <br>
         `;
-        pdfContent.appendChild(productDiv);
     });
 
+    pdfContent.innerHTML += `
+            </tbody>
+        </table>
+        <p><strong>Total: $${totalFactura}</strong></p>
+    `;
+
+    // Verificar el contenido generado
+    console.log(pdfContent.innerHTML);
+
+    // Generar el PDF
     html2pdf().from(pdfContent).save();
 }
 
