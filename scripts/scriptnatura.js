@@ -1,10 +1,10 @@
 const productos = [
-    { nombre: "Gordoputo", precio: 18000, imagen: "imagenes/Productos/producto1.jpeg" },
-    { nombre: "Vaso con destapador", precio: 18000, imagen: "imagenes/Productos/producto2.jpeg" },
-    { nombre: "Cartera 1", precio: 15000, imagen: "imagenes/Productos/producto3.jpeg" },
-    { nombre: "Cartera 2", precio: 20000, imagen: "imagenes/Productos/producto4.jpeg" },
-    { nombre: "Mochila chica femenina", precio: 24000, imagen: "imagenes/Productos/producto5.jpeg" },
-    { nombre: "Mochila grande", precio: 30000, imagen: "imagenes/Productos/producto6.jpeg" },
+    { nombre: "Vaso doble tapa", precio: 18000, imagen: "scripts/productos/producto1.jpeg" },
+    { nombre: "Vaso con destapador", precio: 18000, imagen: "scripts/productos/producto2.jpeg" },
+    { nombre: "Cartera 1", precio: 15000, imagen: "scripts/productos/producto3.jpeg" },
+    { nombre: "Cartera 2", precio: 20000, imagen: "scripts/productos/producto4.jpeg" },
+    { nombre: "Mochila chica femenina", precio: 24000, imagen: "scripts/productos/producto5.jpeg" },
+    { nombre: "Mochila grande", precio: 30000, imagen: "scripts/productos/producto6.jpeg" },
 
 ];
 
